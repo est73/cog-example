@@ -42,7 +42,7 @@ class Admin(commands.Cog):
     @commands.is_owner()
     async def pull(self, ctx):
         output = run(['git', 'pull'], stdout=PIPE, stderr=STDOUT, text=True)
-        await ctx.send(output)
+        await ctx.send(output.stdout)
 
 
 def setup(bot):
