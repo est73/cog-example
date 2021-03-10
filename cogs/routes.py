@@ -18,7 +18,7 @@ class Routes(commands.Cog):
 
     @tasks.loop()
     async def api(self):
-        options = {'bind': '127.0.0.1:5000', # default is 127.0.0.1:8000
+        options = {'bind': '127.0.0.1:8000', # default is 127.0.0.1:8000
                    'certfile': None, # path to cert
                    'keyfile': None, # path to key
                    'accesslog': 'access.log',
