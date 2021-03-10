@@ -1,5 +1,5 @@
 from discord.ext import commands
-from subprocess import Popen, PIPE, STDOUT
+from subprocess import run, PIPE, STDOUT
 
 
 class Admin(commands.Cog):
@@ -40,13 +40,9 @@ class Admin(commands.Cog):
 
     @commands.command(hidden=True)
     @commands.is_owner()
-    async def pull(self, ctx, repo):
-        output = ''
-        proc = Popen(['git', 'pull', '--progress'], stdout=PIPE, stderr=STDOUT, text=True)
-        for line in proc.stdout:
-            if line and any(ele in line.lower() for ele in ['cloning', 'done', 'total', 'error']):
-                output += f'{line.strip()}\n'
-        await ctx.send(output)
+    async def pull(self, ctx):
+        proc = run(['git', 'pull'], stdout=PIPE, stderr=STDOUT, text=True)
+        await ctx.send(proc.stdout)
 
 
 def setup(bot):
